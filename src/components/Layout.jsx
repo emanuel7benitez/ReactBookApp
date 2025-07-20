@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
             <div className="size-4">
               <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path></svg>
             </div>
-            <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">TaskMaster</h2>
+            <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">BookMaster</h2>
           </div>
           {user && <>
           <div className="flex flex-1 justify-end gap-8">
