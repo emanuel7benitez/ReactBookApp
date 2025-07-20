@@ -1,23 +1,26 @@
 
 import { Layout } from "../components/Layout"
-import { useTasks } from "../hooks/useTasks"
+import { useBooks } from "../hooks/useBooks"
 import { NotFound } from "../components/NotFound";
 import { Books } from "../components/Books";
 import { TitleApp } from "../components/TitleApp";
 
 const Home = () => {
   const {
-    tasks,
+    books,
     gender,
     selectedGender,
     loader,
     error,
     handleComplete,
     handleDelete,
-    addTask,
+    addBook,
     changesText,
+    filteredBooks,
+    search,
+    setSearch,
     changesSelectedGender
-  } = useTasks()
+  } = useBooks()
 
 
 
@@ -92,7 +95,7 @@ const Home = () => {
               </div>
               <div className="flex px-4 py-3 justify-end">
                 <button
-                  onClick={() => addTask()}
+                  onClick={() => addBook()}
                   className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#4264fa] text-white text-sm font-bold leading-normal tracking-[0.015em]"
                 >
                   <span className="truncate">Add Book</span>
@@ -100,7 +103,7 @@ const Home = () => {
               </div>
             </details>
           </div>
-          {tasks.length > 0 && 
+          {books.length > 0 && 
            <div className="px-4 py-3">
               <label className="flex flex-col min-w-40 h-12 w-full">
                 <div className="flex w-full flex-1 items-stretch rounded-xl h-full">
@@ -121,20 +124,22 @@ const Home = () => {
                     </svg>
                   </div>
                   <input
+                    onChange={e => setSearch(e.target.value)}
+                    value={search}
                     placeholder="Search book titles"
                     className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#282d43] focus:border-none h-full placeholder:text-[#99a0c2] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
                   />
                 </div>
               </label>
             </div>}
-          {tasks.length > 0 ? (
+          {books.length > 0 ? (
             
-              tasks.map((book) => (
+              filteredBooks.map((book) => (
                 <Books key={book._id} book={book} handleComplete={handleComplete} handleDelete={handleDelete}></Books>
             ))
           ) : (
             <div className="px-40 flex flex-1 justify-center py-5">
-              {tasks.length === 0 && (
+              {books.length === 0 && (
                 <NotFound></NotFound>
               )}
             </div>

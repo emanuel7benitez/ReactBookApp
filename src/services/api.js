@@ -5,8 +5,8 @@ const API_URL = NODE_DEV === "production"
   ? import.meta.env.VITE_BASE_API_URL
   : "http://localhost:8081/api"
 
-const getTasks = async (token) => {
-  const response = await fetch(`${API_URL}/tasks`, {
+const getBooks = async (token) => {
+  const response = await fetch(`${API_URL}/books`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -24,8 +24,8 @@ const getGenders = async (token) => {
   return data.data
 }
 
-const createTask = async (text, gender, token) => {
-  const res = await fetch(`${API_URL}/tasks`, {
+const createBook = async (text, gender, token) => {
+  const res = await fetch(`${API_URL}/books`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,8 +44,8 @@ const createTask = async (text, gender, token) => {
 }
 
 
-const deleteTasks = async (id, token) => {
-  await fetch(`${API_URL}/tasks/${id}`, {
+const deleteBooks = async (id, token) => {
+  await fetch(`${API_URL}/books/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`
@@ -53,8 +53,8 @@ const deleteTasks = async (id, token) => {
   })
 }
 
-const updateTask = async (id, completed, token) => {
-  const res = await fetch(`${API_URL}/tasks/${id}`, {
+const updateBook = async (id, completed, token) => {
+  const res = await fetch(`${API_URL}/books/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -72,4 +72,4 @@ const updateTask = async (id, completed, token) => {
   return data.data
 }
 
-export { getTasks, createTask, deleteTasks, updateTask, getGenders }
+export { getBooks, createBook, deleteBooks, updateBook, getGenders }

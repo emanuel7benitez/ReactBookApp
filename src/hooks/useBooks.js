@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react"
-import { createTask, deleteTasks, getGenders, getTasks, updateTask } from "../services/api"
+import { createBook, deleteBooks, getGenders, getBooks, updateBook } from "../services/api"
 import { useAuth } from "../context/authContext"
 
-const useTasks = () => {
-  const [tasks, setTasks] = useState([])
-  const [gender, setGender] = useState([])
-  const [selectedGender, setSelectedGender] = useState('')
-  const [text, setText] = useState('')
-  const [loader, setLoader] = useState(false)
-  const [error, setError] = useState(null)
+const useBooks = () => {
+  const [books, setBooks] = useState([]);
+  const [gender, setGender] = useState([]);
+  const [selectedGender, setSelectedGender] = useState('');
+  const [text, setText] = useState('');
+  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState('');
 
   const { token } = useAuth()
 
   useEffect(() => {
-    const fetchingTasks = async () => {
+    const fetchingBooks = async () => {
       setLoader(true)
       try {
-        const tasks = await getTasks(token)
+        const books = await getBooks(token)
         const gender = await getGenders(token)
-        setTasks(tasks)
+        setBooks(books)
         setGender(gender)
       } catch (error) {
         setError("Error al recuperar los libros: " + error)
@@ -27,7 +28,7 @@ const useTasks = () => {
       }
     }
 
-    if (token) fetchingTasks()
+    if (token) fetchingBooks()
   }, [token])
   const changesSelectedGender = (value) => {
    
@@ -38,7 +39,14 @@ const useTasks = () => {
     setText(value)
   }
 
-  const addTask = async () => {
+   
+ const filteredBooks = books.filter(book =>
+    (book?.text ?? '').toLowerCase().includes(search.toLowerCase())
+  );
+
+  
+
+  const addBook = async () => {
 
     if (!text || !selectedGender) {
       setError('Debe completar todos los campos obligatorios.');
@@ -49,8 +57,8 @@ const useTasks = () => {
     setError(null);
 
     try {
-      const data = await createTask(text, selectedGender, token)
-      setTasks(prev => [data, ...prev]);
+      const data = await createBook(text, selectedGender, token)
+      setBooks(prev => [data, ...prev]);
       setSelectedGender(null);
       setText(null);
     } catch (error) {
@@ -61,8 +69,8 @@ const useTasks = () => {
   const handleDelete = async (id) => {
     try {
       if (confirm("¿Estás seguro de que quieres borrar esta tarea?")) {
-        await deleteTasks(id, token)
-        setTasks(tasks.filter(t => t._id !== id))
+        await deleteBooks(id, token)
+        setBooks(books.filter(t => t._id !== id))
       }
     } catch (error) {
       console.error(error.message)
@@ -71,8 +79,8 @@ const useTasks = () => {
 
   const handleComplete = async ({ _id, completed }) => {
     try {
-      const data = await updateTask(_id, completed, token)
-      setTasks(tasks.map(t => (t._id === _id ? data : t)))
+      const data = await updateBook(_id, completed, token)
+      setBooks(books.map(t => (t._id === _id ? data : t)))
     } catch (error) {
       console.error(error.message)
       setError(error.message)
@@ -80,12 +88,15 @@ const useTasks = () => {
   }
 
   return {
-    tasks,
+    books,
     gender,
     loader,
     error,
     selectedGender,
-    addTask,
+    filteredBooks,     // libros filtrados
+    search,            // texto de búsqueda actual
+    setSearch,         // función para actualizar la búsqueda
+    addBook,
     handleDelete,
     handleComplete,
     changesSelectedGender,
@@ -93,4 +104,4 @@ const useTasks = () => {
   }
 }
 
-export { useTasks }
+export { useBooks }
