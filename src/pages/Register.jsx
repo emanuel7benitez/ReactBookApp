@@ -30,8 +30,6 @@ const Register = () => {
       });
 
       const data = await response.json();
-      console.log(data);
-      console.log(user);
 
       if (!response.ok) {
         throw new Error(data.message || "Register failed");
@@ -50,34 +48,6 @@ const Register = () => {
 
   return (
     <Layout>
-      {/* {user && <h2>Hola, {user.name} 😎</h2>}
-    {!user && <form onSubmit={handleSubmit}>
-      <h2>Registro</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={e => setName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        required
-      />
-      <button>Registrarse</button>
-    </form>} */}
-
       <div className="px-40 flex flex-1 justify-center py-5">
         <div className="layout-content-container flex flex-col w-[512px] py-5 max-w-[960px] flex-1 items-center h-16">
           <h2 className="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">

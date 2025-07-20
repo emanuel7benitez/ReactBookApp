@@ -29,32 +29,6 @@ const useTasks = () => {
 
     if (token) fetchingTasks()
   }, [token])
-
-  /* useEffect(() => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-
-    const recognition = new SpeechRecognition()
-
-    recognition.lang = "es-AR"
-    recognition.continuous = true
-    recognition.interimResults = false
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[event.results.length - 1][0].transcript.trim()
-      addTask(transcript.charAt(0).toUpperCase() + transcript.slice(1) + '.')
-    }
-
-    recognitionRef.current = recognition
-  }, []) */
-
-  /* const toggleListening = () => {
-    if (isListening) {
-      recognitionRef.current.stop()
-    } else {
-      recognitionRef.current.start()
-    }
-    setIsListening(!isListening)
-  } */
   const changesSelectedGender = (value) => {
    
     setSelectedGender(value)
@@ -67,7 +41,6 @@ const useTasks = () => {
   const addTask = async () => {
 
     if (!text || !selectedGender) {
-      console.log(error);
       setError('Debe completar todos los campos obligatorios.');
       return
     }
@@ -97,7 +70,6 @@ const useTasks = () => {
   }
 
   const handleComplete = async ({ _id, completed }) => {
-    console.log(completed)
     try {
       const data = await updateTask(_id, completed, token)
       setTasks(tasks.map(t => (t._id === _id ? data : t)))

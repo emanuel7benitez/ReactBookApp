@@ -27,7 +27,6 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log(response);
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
@@ -39,7 +38,6 @@ const Login = () => {
       login(data);
       navigate("/");
     } catch (error) {
-      console.log('error')
       setError('Error: ' + error.message);
     }
   };
@@ -47,28 +45,6 @@ const Login = () => {
   return (
     <Layout>
       <>
-        {/* {
-        !user ? <form onSubmit={handleSubmit}>
-          <h2>Iniciar sesión</h2>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Entrar</button>
-        </form> : <h1>Usuario logueado</h1>
-      } */}
-
         <div className="px-40 flex flex-1 justify-center py-5">
           <div className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] items-center flex-1 h-16">
             <h2 className="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
