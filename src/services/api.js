@@ -54,7 +54,6 @@ const deleteTasks = async (id, token) => {
 }
 
 const updateTask = async (id, completed, token) => {
-  console.log({ completed: !completed })
   const res = await fetch(`${API_URL}/tasks/${id}`, {
     method: "PATCH",
     headers: {
