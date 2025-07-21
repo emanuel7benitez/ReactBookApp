@@ -43,7 +43,7 @@ Creá un archivo .env con las siguientes variables:
 VITE_NODE_ENV=development
 VITE_BASE_API_URL=http://localhost:2222/api
 🗂 Estructura del Proyecto
-
+```
 src/
 ├── components/        → Componentes reutilizables (Books, Navbar, Checkbox, etc.)
 ├── context/           → AuthContext para JWT y sesión de usuario
@@ -52,6 +52,7 @@ src/
 ├── router/            → Rutas protegidas y públicas
 ├── services/          → api.js: Lógica de peticiones al backend
 └── index.css          → Estilos globales y responsive
+```
 ✅ Funcionalidades Clave
 🔐 Autenticación JWT: Registro e inicio de sesión protegidos. El token se guarda en localStorage y se usa para consumir la API.
 
