@@ -15,13 +15,23 @@ const getBooks = async (token) => {
   return data.data
 }
 const getGenders = async (token) => {
-  const response = await fetch(`${API_URL}/genders`, {
+  const genders = [
+  { "name": "Ficción" },
+  { "name": "No ficción" },
+  { "name": "Ciencia y tecnología" },
+  { "name": "Desarrollo personal" },
+  { "name": "Infantil y juvenil" }
+]
+
+return genders
+
+  /* const response = await fetch(`${API_URL}/genders`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
   const data = await response.json()
-  return data.data
+  return data.data */
 }
 
 const createBook = async (text, gender, token) => {
