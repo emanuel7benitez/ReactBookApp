@@ -29,6 +29,7 @@ Instalá las dependencias:
 
 npm install
 📦 Scripts disponibles
+```bash
 npm run dev: Levanta el entorno de desarrollo con Vite.
 
 npm run build: Compila el proyecto para producción.
@@ -36,13 +37,15 @@ npm run build: Compila el proyecto para producción.
 npm run preview: Previsualiza el build de producción.
 
 npm run lint: Analiza el código con ESLint.
+```
 
 🌐 Variables de entorno
 Creá un archivo .env con las siguientes variables:
-
+```bash
 VITE_NODE_ENV=development
 VITE_BASE_API_URL=http://localhost:2222/api
 🗂 Estructura del Proyecto
+```
 ```
 src/
 ├── components/        → Componentes reutilizables (Books, Navbar, Checkbox, etc.)
